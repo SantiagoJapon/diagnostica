@@ -8,62 +8,53 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // Lista de URLs de imágenes
+    List<String> imageUrls = [
+      'https://cdn.pixabay.com/photo/2023/09/05/18/18/eurasian-pygmy-owl-8235624_1280.jpg',
+      'https://cdn.pixabay.com/photo/2023/09/22/18/39/bear-8269620_1280.jpg',
+      'https://cdn.pixabay.com/photo/2023/12/15/21/47/cat-8451431_1280.jpg',
+      'https://cdn.pixabay.com/photo/2023/05/21/06/29/flowers-8007929_1280.jpg',
+      // Añade más URLs de imágenes aquí
+    ];
 
-    //CREAMOS LA INSTANCIA DE LA CLASE PERSONA
-
-    Persona persona = Persona.fromEdad(edad: 21);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-
-          //ESTE ES EL TITULO
-
-          title: Text('Prueba Diagnostica',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 40.0,
-            fontWeight: FontWeight.bold,
-          ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-
-        //EN ESTE CASO, AGREGUE UN FONDO PARA EL CONTENEDOR DONDE SE VAN A
-        //PRESENTAR LAS INSTANCIAS DE LA CLASE PERSONA
-
-        body: Center(
-          child: Container(
-            color: Colors.blueGrey,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 1.0,vertical: 1.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-
-                  //AQUI EMPIEZA LA PARTE DONDE SE VA A PRESENTAR LA INSTANCIA
-                  //LLAMANDO A persona QUE FUE LO QUE CREAMOS EN EL INICIO
-
-                  Text(
-                    persona.toString(),
-                    style: TextStyle(
-                      color: Colors.cyan,
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+          title: Center(
+            child: const Text(
+              'Galería de Imágenes',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 40.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
-      )
+        body: Center(
+          child: Container(
+            color: Colors.blueGrey,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0),
+              child: ListView.builder(
+                itemCount: imageUrls.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.network(imageUrls[index]),
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
